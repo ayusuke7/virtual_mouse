@@ -1,39 +1,65 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Virtual Mouse
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+![](https://img.shields.io/pub/v/flutter_custom_cursor?color=green)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+This package was created to solve a common problem in applications developed for TV and WebView. Interacting directly with the rendered components.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Platforms
 
-## Features
+- [x] Android
+- [x] IOs
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+[Note] The library tries to simulate the behavior of a click on the screen based on the cursor positions and coordinates. Restricting its use only to devices with gestures and touches on the screen.
 
-## Getting started
+![Virtual](images/screenshot.gif "Virtual Mouse")
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+## Register your virtual mouse
 
 ```dart
-const like = 'sample';
+  VirtualMouse(
+    onKeyPressed: (key) {
+      // KeyPressed current state (pressed/unpressed)
+    },
+    onMove: (offset, size) {
+      // Cursor position and Size screen dimension.
+    },
+    child: Column(
+      children: [
+        /// Add the components for Interactions
+      ],
+    ),
+  ),
 ```
 
-## Additional information
+Note that a String `cacheName` will be returned by the function `registerCursor`, which can be used to set this cursor to system or delete this cursor.
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+## Set on custom cursor
+
+The Mouse is waiting to receive a componente extends on `CustomPainter`. Default is Painter basic with red arrow.
+
+```dart
+  VirtualMouse(
+    pointer: MyCustomPointer()
+    //....
+  )
+```
+
+```dart
+class MyCustomPointer extends CustomPainter {}
+
+```
+
+## VirtualMouse Propreties
+
+| Property       | Description                                                                                                |
+| -------------- | ---------------------------------------------------------------------------------------------------------- |
+| `child`        | (Required) The child widget to be rendered inside the virtual mouse cursor.                                |
+| `node`         | (Optional) The focus node to be used in the virtual mouse cursor                                           |
+| `autoFocus`    | (Optional) If the virtual mouse cursor should be focused when the widget is rendered. The default is true. |
+| `velocity`     | (Optional) The velocity of the virtual mouse cursor movement incremented. The default is 1.0               |
+| `duration`     | (Optional) The duration of the virtual mouse cursor movement in milliseconds. The default is 10.           |
+| `angle`        | (Optional) The angle of the pointer in degrees. The default is -40.0.                                      |
+| `pointerColor` | (Optional) The color of the pointer. The default is Colors.red.                                            |
+| `pointer`      | (Optional) Custom pointer to be used in the virtual mouse cursor.                                          |
+| `onKeyPressed` | (Function) Callback to be called when a key is pressed. The key pressed is passed as argument.             |
+| `onMove`       | (Function) Callback to be called when the mouse is moved to a new position.                                |

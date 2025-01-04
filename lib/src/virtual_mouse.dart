@@ -13,10 +13,10 @@ class VirtualMouse extends StatefulWidget {
   /// If the virtual mouse cursor should be focused when the widget is rendered
   final bool autoFocus;
 
-  /// The velocity of the virtual mouse cursor movement
+  /// The velocity of the virtual mouse cursor movement in milliseconds
   final double velocity;
 
-  /// The angle of the pointer
+  /// The angle of the pointer in degrees
   final double angle;
 
   /// The duration of the virtual mouse cursor movement
