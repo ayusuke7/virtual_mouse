@@ -1,6 +1,6 @@
 name: virtual_mouse
 description: "A package to simulate mouse events in Flutter"
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/ayusuke7/virtual_mouse
 repository: https://github.com/ayusuke7/virtual_mouse
 

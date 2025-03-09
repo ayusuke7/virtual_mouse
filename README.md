@@ -17,6 +17,9 @@ This package was created to solve a common problem in applications developed for
 
 ```dart
   VirtualMouse(
+    onKeyEvent: (event) {
+      // KeyEvent current when pressed
+    },
     onKeyPressed: (key) {
       // KeyPressed current state (pressed/unpressed)
     },
@@ -62,4 +65,5 @@ class MyCustomPointer extends CustomPainter {}
 | `pointerColor` | (Optional) The color of the pointer. The default is Colors.red.                                            |
 | `pointer`      | (Optional) Custom pointer to be used in the virtual mouse cursor.                                          |
 | `onKeyPressed` | (Function) Callback to be called when a key is pressed. The key pressed is passed as argument.             |
+| `onKeyEvent`   | (Function) Callback to be called when any key is pressed. The keyEvend is passed as argument.              |
 | `onMove`       | (Function) Callback to be called when the mouse is moved to a new position.                                |
