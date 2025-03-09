@@ -40,7 +40,11 @@ class VirtualMouse extends StatefulWidget {
   /// - keyMap.left
   /// - keyMap.right
   /// - keyMap.enter
+  /// - keyMap.other
   final Function(KeyHandler key)? onKeyPressed;
+
+  /// Callback to be called when any key is pressed
+  final Function(KeyEvent event)? onKeyEvent;
 
   /// Callback to be called when the mouse is moved to a new position
   final Function(Offset offset, Size constrants)? onMove;
@@ -51,6 +55,7 @@ class VirtualMouse extends StatefulWidget {
     this.onMove,
     this.pointer,
     this.onKeyPressed,
+    this.onKeyEvent,
     this.velocity = 1.0,
     this.angle = -40.0,
     this.autoFocus = true,
@@ -77,7 +82,8 @@ class _VirtualMouseState extends State<VirtualMouse> {
 
   Offset get offset {
     if (_pointerKey.currentContext != null) {
-      final renderbox = _pointerKey.currentContext?.findRenderObject() as RenderBox;
+      final renderbox =
+          _pointerKey.currentContext?.findRenderObject() as RenderBox;
       return renderbox.localToGlobal(Offset.zero);
     }
 
@@ -210,8 +216,11 @@ class _VirtualMouseState extends State<VirtualMouse> {
       _keyMap.keyEnter(pressed);
     } else if (event.logicalKey == LogicalKeyboardKey.enter) {
       _keyMap.keyEnter(pressed);
+    } else {
+      _keyMap.keyOther(pressed);
     }
 
+    widget.onKeyEvent?.call(event);
     return KeyEventResult.handled;
   }
 }

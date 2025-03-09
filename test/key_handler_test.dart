@@ -17,6 +17,7 @@ void main() {
       expect(keyHandler.enter, false);
       expect(keyHandler.any, false);
       expect(keyHandler.arrows, false);
+      expect(keyHandler.other, false);
       expect(keyHandler.keyPressed, KeyPressed.none);
     });
 
@@ -50,18 +51,26 @@ void main() {
       expect(keyHandler.keyPressed, KeyPressed.enter);
     });
 
+    test('keyEnter sets _other to true', () {
+      keyHandler.keyOther(true);
+      expect(keyHandler.other, true);
+      expect(keyHandler.keyPressed, KeyPressed.other);
+    });
+
     test('reset sets all keys to false', () {
       keyHandler.keyUp(true);
       keyHandler.keyDown(true);
       keyHandler.keyLeft(true);
       keyHandler.keyRight(true);
       keyHandler.keyEnter(true);
+      keyHandler.keyOther(true);
       keyHandler.reset();
       expect(keyHandler.up, false);
       expect(keyHandler.down, false);
       expect(keyHandler.left, false);
       expect(keyHandler.right, false);
       expect(keyHandler.enter, false);
+      expect(keyHandler.other, false);
       expect(keyHandler.keyPressed, KeyPressed.none);
     });
   });

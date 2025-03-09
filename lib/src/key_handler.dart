@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum KeyPressed { up, down, left, right, enter, none }
+enum KeyPressed { up, down, left, right, enter, none, other }
 
 class KeyHandler extends ChangeNotifier {
   bool _up = false;
@@ -8,6 +8,7 @@ class KeyHandler extends ChangeNotifier {
   bool _left = false;
   bool _right = false;
   bool _enter = false;
+  bool _other = false;
 
   bool get arrows => _up || _left || _down || _right;
   bool get any => arrows || _enter;
@@ -16,6 +17,7 @@ class KeyHandler extends ChangeNotifier {
   bool get left => _left;
   bool get right => _right;
   bool get enter => _enter;
+  bool get other => _other;
 
   KeyPressed get keyPressed {
     if (_up) return KeyPressed.up;
@@ -23,6 +25,7 @@ class KeyHandler extends ChangeNotifier {
     if (_left) return KeyPressed.left;
     if (_right) return KeyPressed.right;
     if (_enter) return KeyPressed.enter;
+    if (_other) return KeyPressed.other;
     return KeyPressed.none;
   }
 
@@ -51,12 +54,18 @@ class KeyHandler extends ChangeNotifier {
     notifyListeners();
   }
 
+  void keyOther(bool pressed) {
+    _other = pressed;
+    notifyListeners();
+  }
+
   void reset() {
     _up = false;
     _down = false;
     _right = false;
     _left = false;
     _enter = false;
+    _other = false;
     notifyListeners();
   }
 }
